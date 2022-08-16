@@ -1,0 +1,266 @@
+const Ajv = require('ajv').default;
+const AjvFormats = require('ajv-formats');
+const ajv = new Ajv({ useDefaults: true });
+const betterAjvErrors = require('better-ajv-errors').default;
+AjvFormats(ajv);
+
+let impRtest = [
+  {
+    'Order ID': 34343,
+    Customer: 'VINET',
+    Booker: 'Steven Buchanan',
+    Ordered: 4,
+    'Required by': 1,
+    Shipped: 16,
+    REGION: 'Europe',
+    Country: 'France',
+    'Order value': 440,
+    Rating: 3,
+  },
+  {
+    'Order ID': 10249,
+    Customer: 'TOMSP',
+    Booker: 'Michael Suyama',
+    Ordered: 5,
+    'Required by': 16,
+    Shipped: 10,
+    REGION: 'Europe ',
+    Country: 'Germany',
+    'Order value': 1863,
+    Rating: 3,
+  },
+  {
+    'Order ID': 10250,
+    Customer: 'HANAR',
+    Booker: '[Deleted user]',
+    Ordered: 8,
+    'Required by': 5,
+    Shipped: 12,
+    REGION: 'S. America',
+    Country: 'Brazil',
+    'Order value': 1813,
+    Rating: 4,
+  },
+  {
+    'Order ID': 10251,
+    Customer: 'VICTE',
+    Booker: '[Deleted user]',
+    Ordered: 8,
+    'Required by': 5,
+    Shipped: 15,
+    REGION: 'Europe  ',
+    Country: 'France',
+    'Order value': 670,
+    Rating: 4,
+  },
+  {
+    'Order ID': 10252,
+    Customer: 'SUPRD',
+    Booker: '[Deleted user]',
+    Ordered: 9,
+    'Required by': 6,
+    Shipped: 11,
+    REGION: 'Europe  ',
+    Country: 'Belgium',
+    'Order value': 3730,
+    Rating: 5,
+  },
+  {
+    'Order ID': 10253,
+    Customer: 'HANAR',
+    Booker: 'Margaret Peacock',
+    Ordered: 10,
+    'Required by': 24,
+    Shipped: 16,
+    REGION: 'S America',
+    Country: 'Brazil',
+    'Order value': 1444,
+    Rating: 5,
+  },
+  {
+    'Order ID': 10254,
+    Customer: 'CHOPS',
+    Booker: 'Steven Buchanan',
+    Ordered: 11,
+    'Required by': 8,
+    Shipped: 23,
+    REGION: 'Europe',
+    Country: 'Switzerland',
+    'Order value': 625,
+    Rating: 4,
+  },
+  {
+    'Order ID': 10255,
+    Customer: 'RICSU',
+    Booker: 'Anne Dodsworth',
+    Ordered: 12,
+    'Required by': 2,
+    Shipped: 28,
+    REGION: 'Europe',
+    Country: 'Switzerland',
+    'Order value': 2490,
+    Rating: 2,
+  },
+  {
+    'Order ID': 10256,
+    Customer: 'WELLI',
+    Booker: '[Deleted user]',
+    Ordered: 15,
+    'Required by': 12,
+    Shipped: 17,
+    REGION: 'S. America',
+    Country: 'Brazil',
+    'Order value': 517,
+    Rating: 4,
+  },
+  {
+    'Order ID': 10257,
+    Customer: 'HILAA',
+    Booker: '[Deleted user]',
+    Ordered: 16,
+    'Required by': 13,
+    Shipped: 22,
+    REGION: 'S. America',
+    Country: 'Venezuela',
+    'Order value': 1119,
+    Rating: 3,
+  },
+  {
+    'Order ID': 10258,
+    Customer: 'ERNSH',
+    Booker: '[Deleted user]',
+    Ordered: 17,
+    'Required by': 14,
+    Shipped: 23,
+    REGION: 'S. America',
+    Country: 'Brazil',
+    'Order value': 2018,
+    Rating: 3,
+  },
+  {
+    'Order ID': 10259,
+    Customer: 'CENTC',
+    Booker: 'Margaret Peacock ',
+    Ordered: 18,
+    'Required by': 15,
+    Shipped: 25,
+    REGION: 'S. America',
+    Country: 'Mexico',
+    'Order value': 100,
+    Rating: 5,
+  },
+  {
+    'Order ID': 10260,
+    Customer: 'OTTIK',
+    Booker: 'Margaret Peacock',
+    Ordered: 19,
+    'Required by': 16,
+    Shipped: 29,
+    REGION: 'Europe ',
+    Country: 'Germany',
+    'Order value': 1746,
+    Rating: 5,
+  },
+  {
+    'Order ID': 10261,
+    Customer: 'QUEDE',
+    Booker: 'Margaret Peacock',
+    Ordered: 19,
+    'Required by': 16,
+    Shipped: 30,
+    REGION: 'S. America',
+    Country: 'Brazil',
+    'Order value': 448,
+    Rating: 3,
+  },
+  {
+    'Order ID': 10262,
+    Customer: 'RATTC',
+    Booker: 'Nancy Davolio',
+    Ordered: 22,
+    'Required by': 19,
+    Shipped: 25,
+    REGION: 'USA',
+    Country: 'USA',
+    'Order value': 624,
+    Rating: 4,
+  },
+  {
+    'Order ID': 10257,
+    Customer: 'HILAA',
+    Booker: 'Margaret Peacock',
+    Ordered: 16,
+    'Required by': 13,
+    Shipped: 22,
+    REGION: 'S. America',
+    Country: 'Venezuela',
+    'Order value': 1119,
+    Rating: 2,
+  },
+];
+
+const schema = {
+  type: 'object',
+  properties: {
+    OrderID: {
+      type: 'integer',
+    },
+    Customer: {
+      type: 'string',
+    },
+    Booker: {
+      type: 'string',
+    },
+    Ordered: {
+      type: 'integer',
+    },
+    Required: {
+      type: 'integer',
+    },
+    Shipped: {
+      type: 'integer',
+    },
+    REGION: {
+      type: 'string',
+    },
+    Country: {
+      type: 'string',
+    },
+    Value: {
+      type: 'string',
+    },
+    Rating: {
+      type: 'integer',
+    },
+  },
+  additionalProperties: true,
+};
+// let results = [];
+const check = async (data, structure) => {
+  const validate = ajv.compile(structure);
+  const resp = validate(data[0]);
+  if (!resp) {
+    const output = betterAjvErrors(structure, data, validate.errors);
+    console.log('no error');
+    return output;
+  } else {
+    console.log('valid');
+    return resp;
+  }
+};
+check(impRtest, schema);
+// console.log(results);
+// check(obj, schema).then(console.log);
+// true
+
+// check(impRtest, schema).then(console.log);
+// true
+// for (let i = 0; i < impRtest.length; i++) {
+//   const validate = ajv.compile(schema);
+//   const valid = validate(impRtest[0]);
+
+//   if (!valid) {
+//     const output = betterAjvErrors(schema, impRtest, validate.errors);
+//     console.log(output);
+//   }
+// }
